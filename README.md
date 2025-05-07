@@ -55,7 +55,7 @@ Ride-N-Meet can be used in:
 
 **Praveen Kumar V**
 
-Final Year BCA Student  
+BCA Graduate
 Passionate about UI/UX, automation, and low-code solutions.
 
 📫 [Connect with me on LinkedIn](https://www.linkedin.com/in/praveen-kumar-v2a1a255/)
