@@ -1,0 +1,1844 @@
+/*
+ * Author       : zohopractise
+ * Generated on : 20-Apr-2025 09:25:40
+ * Version      : 1.0
+ */
+ application "Ride-N-Meet"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+ 	forms
+	{
+		form Join_Ride
+		{
+			displayname = "Join Ride"
+			success message = "Ride Joined Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			plain
+			(
+    			type = plaintext
+				value = "<div style=\"display: flex; align-items: center; justify-content: center; text-align: center\"><img width=\"192\" height=\"193\" alt=\"RIDE Logo\" style=\"max-width: 353px; margin-right: 20px\" src=\"https://www.tedxjakarta.org/wp-content/uploads/2014/09/RIDE-Logo.png\"> <span class=\"font\" style=\"font-family: Rubik, sans-serif\"> </span> <div style=\"font-size: 24px; font-family: Arial, sans-serif; font-weight: bold; color: black\"><span class=\"size\" style=\"font-size: 48px\"><span class=\"font\" style=\"font-family: Rubik, sans-serif\">-N-MEET </span> </span> <br /></div></div><div><br /></div>"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Mode_of_Travel
+			(
+				type = radiobuttons
+				displayname = "Mode of Travel"
+				maxchar = 100
+				values = {"InterState","IntraState"}
+				initial value = "IntraState"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Vehicle_Type
+			(
+				type = picklist
+				displayname = "Vehicle Type"
+				maxchar = 100
+				values = {"2-Wheeler","4-Wheeler"}
+				initial value = "2-Wheeler"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			InterState
+			(
+				type = section
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			slot1
+			(
+				type = picklist	
+				displayname = "Departure Location"
+				values  = Slots[Mode_of_Travel == "Inter-State"].ID
+    			displayformat = [Departure_Location2]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			slot2
+			(
+				type = picklist	
+				displayname = "Destination Location"
+				values  = Slots[Mode_of_Travel == "Inter-State"].ID
+    			displayformat = [Destination_Location2]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			slot3
+			(
+				type = picklist	
+				displayname = "Travel Date"
+				values  = Slots[Availablity == "Yes"].ID
+    			displayformat = [Date_field]
+				sortorder = ascending
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			IntraState
+			(
+				type = section
+				visibility = true
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			slotin1
+			(
+				type = picklist	
+				displayname = "Departure Location"
+				values  = Slots[Mode_of_Travel == "Intra-State"].ID
+    			displayformat = [Departure_Location1]
+				sortorder = ascending
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			slotin2
+			(
+				type = picklist	
+				displayname = "Destination Location"
+				values  = Slots[Mode_of_Travel == "Intra-State"].ID
+    			displayformat = [Destination_Location1]
+				sortorder = ascending
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Date_field
+			(
+				type = picklist	
+				displayname = "Date"
+				values  = Slots.ID
+    			displayformat = [Date_field]
+				sortorder = ascending
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Passeger_Details
+			(
+				type = section
+				displayname = "Passeger Details"
+				visibility = true
+	 			row = 4
+	 			column = 0   
+				width = medium
+			)
+			Name
+			(
+    			type = text
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 4
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 4
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Seats_Required
+			(
+				type = picklist
+				displayname = "Seats Required"
+				maxchar = 100
+				values = {"2 seats","3 seats","4 seats","5 seats","6 seats"}
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Section1
+			(
+				type = section
+				displayname = "Section"
+	 			row = 5
+	 			column = 0   
+				width = medium
+			)
+			Amount
+			(
+				type = INR
+				format = commadotindian
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Confirm_Ride
+			(
+				type = radiobuttons
+				displayname = "Confirm Ride"
+				maxchar = 100
+				values = {"Yes","No"}
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Confirmed","Not-Confirmed"}
+				initial value = "Not-Confirmed"
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Join"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Amount","Amount2","Amount3"}
+			}
+		}
+		form Slots
+		{
+			success message = "Slot Added Successfully"
+			Personal_Information
+			(
+				type = section
+				displayname = "Personal Information"
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			plain1
+			(
+    			type = plaintext
+				value = "<div style=\"display: flex; align-items: center; justify-content: center; text-align: center\"><img src=\"https://www.tedxjakarta.org/wp-content/uploads/2014/09/RIDE-Logo.png\" style=\"max-width: 353px; margin-right: 20px\" alt=\"RIDE Logo\" height=\"193\" width=\"192\"><span class=\"font\" style=\"font-family: Rubik, sans-serif\"> </span><div style=\"font-size: 24px; font-family: Arial, sans-serif; font-weight: bold; color: black\"><span class=\"size\" style=\"font-size: 48px\"><span class=\"font\" style=\"font-family: Rubik, sans-serif\">-N-MEET</span></span><br /></div></div><div><br /></div>"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ID1
+			(
+    			type = autonumber
+				displayname = "ID"
+				start index = 2000
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Owner_Name
+			(
+    			type = text
+				displayname = "Owner Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Image
+			(
+    			type = image
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Gender
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Male","Female","Others"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Age
+			(
+				type = number
+				initial value = 0
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Proof_of_Identity
+			(
+    			type = upload file
+				displayname = "Proof of Identity"
+				browse = local_drive
+    			description
+    			[
+    				type = help_text
+    			 	message = "Aadhar Card/PAN Card/Driving License/Voter ID"
+    			]
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Phone_Number
+			(
+    			type = phonenumber
+				displayname = "Phone"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Vehicle_Information
+			(
+				type = section
+				displayname = "Vehicle Information"
+				visibility = true
+	 			row = 2
+	 			column = 0   
+				width = medium
+			)
+			Vehicle_Type
+			(
+				type = picklist
+				displayname = "Vehicle Type"
+				maxchar = 100
+				values = {"2-Wheeler","4-Wheeler"}
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Vehicle_Image
+			(
+    			type = image
+				displayname = "Vehicle Image"
+				source  = file
+				aspect ratio = original
+				camera = primary
+				show gallery = true
+				switch camera = true
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Vehicle_Number
+			(
+    			type = text
+				displayname = "Vehicle Number"
+	 			row = 2
+	 			column = 1   
+				width = medium
+			)
+			Section
+			(
+				type = section
+	 			row = 3
+	 			column = 0   
+				width = medium
+			)
+			Mode_of_Travel
+			(
+				type = radiobuttons
+				displayname = "Mode of Travel"
+				maxchar = 100
+				values = {"Inter-State","Intra-State"}
+				initial value = "Intra-State"
+	 			row = 3
+	 			column = 1   
+				width = medium
+			)
+			Mode_Travel
+			(
+				type = section
+				displayname = "MOT-IntraState"
+				visibility = true
+	 			row = 4
+	 			column = 0   
+				width = medium
+			)
+			Departure_Location1
+			(
+    			type = text
+				displayname = "Departure Location"
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Destination_Location1
+			(
+    			type = text
+				displayname = "Destination_Location"
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Date_field
+			(
+    			type = date
+				displayname = "Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Time
+			(
+    			type = time
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 4
+	 			column = 1   
+				width = medium
+			)
+			Mode_Travel2
+			(
+				type = section
+				displayname = "MOT-InterState"
+				visibility = true
+	 			row = 5
+	 			column = 0   
+				width = medium
+			)
+			Departure_Location2
+			(
+    			type = text
+				displayname = "Departure Location IN"
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Departure_Date
+			(
+    			type = date
+				displayname = "Departure Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Departure_Time
+			(
+    			type = time
+				displayname = "Departure Time"
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			plain
+			(
+    			type = plaintext
+				value = "<div><b>NOTE:</b> The Destination Date and Time may vary in case of any Emergencies.</div>"
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Destination_Location2
+			(
+    			type = text
+				displayname = "Destination Location IN"
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Reach_Date
+			(
+    			type = date
+				displayname = "Reach Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Reach_Time
+			(
+    			type = time
+				displayname = "Reach Time"
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 5
+	 			column = 1   
+				width = medium
+			)
+			Section1
+			(
+				type = section
+				displayname = "Section"
+	 			row = 6
+	 			column = 0   
+				width = medium
+			)
+			Perks
+			(
+				type = list	
+				initial value = {"FirstAid Kit"}
+				values = {"AC","Snacks","Food and Beverages","FirstAid Kit","Musics"}
+				height = 60px
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+			Price
+			(
+				type = INR
+				format = commadotindian
+				initial value = 0
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+			Negotiable
+			(
+				type = radiobuttons
+				maxchar = 100
+				values = {"Yes","NO"}
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+			Availablity
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Yes","No"}
+				initial value = "No"
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+			Discription
+			(
+    			type = textarea
+				height = 100px
+	 			row = 6
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		default list All_Slots
+		{
+			displayName = "All Slots"
+			show all rows from Slots    
+			(
+				Owner_Name as "Owner Name"
+				Vehicle_Type as "Vehicle Type"
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Email
+				Mode_of_Travel as "Mode of Travel"
+				Date_field as "Date"
+				Time
+				Departure_Date as "Departure Date"
+				Departure_Time as "Departure Time"
+				Departure_Location1 as "Departure Location"
+				Destination_Location1 as "Destination_Location"
+				Departure_Location2 as "Departure Location IN"
+				Destination_Location2 as "Destination Location IN"
+				Reach_Date as "Reach Date"
+				Reach_Time as "Reach Time"
+				Perks
+				Negotiable
+				Price
+				Discription
+				Vehicle_Image as "Vehicle Image"
+				Image
+				Age
+				Proof_of_Identity as "Proof of Identity"
+				Gender
+				Vehicle_Number as "Vehicle Number"
+				Availablity
+				ID1 as "ID"
+				custom action "Update"
+				(
+	  			workflow = updateAvailability
+				show action in edit record menu = true
+				column header = "Update"
+				)
+			)
+		}
+		custom Copy_of_All_Slots
+		{
+			displayName = "Copy of All Slots"
+			show all rows from Slots    
+			(
+				Owner_Name as "Owner Name"
+				Vehicle_Type as "Vehicle Type"
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Email
+				Mode_of_Travel as "Mode of Travel"
+				Date_field as "Date"
+				Time
+				Departure_Date as "Departure Date"
+				Departure_Time as "Departure Time"
+				Departure_Location1 as "Departure Location"
+				Destination_Location1 as "Destination_Location"
+				Departure_Location2 as "Departure Location IN"
+				Destination_Location2 as "Destination Location IN"
+				Reach_Date as "Reach Date"
+				Reach_Time as "Reach Time"
+				Perks
+				Negotiable
+				Price
+				Discription
+				Vehicle_Image as "Vehicle Image"
+				Image
+				Age
+				Proof_of_Identity as "Proof of Identity"
+				Gender
+				Vehicle_Number as "Vehicle Number"
+			)
+			customlayouts
+			(
+				template
+	 			(
+	 	  			displayname="Custom Layout 1"
+	 	  			content="<panel  \n >\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		padding = '0px'\n	bgColor = '#FFFFFF'\n\n		width = '100%'\n		hAlign = 'center'\n		vAlign = 'middle'\n>\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		padding = '17px'\n\n		width = '33%'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<pr \n	>\n	<pc \n	\n>\n	<image  \n		marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '0px'\n\n	color = '#FFFFFF'\n	width = '80px'\n	height = '80px'\n	type = 'field'\n	value = 'Image'\n	cornerRadius = '40px'\n/>\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '10px'\n	marginTop = '0px'\n	color = '#000000'\n	size = '20px'\n	uppercase = 'false' \n	underline = 'false' \n	bold = 'true' \n	italic = 'false' \n	type = 'field'\n\n\n\n	  \n      	lineHeight = '28'\n      	  numOfLines = '1'\n	  value = 'Owner_Name'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '0px'\n	color = 'theme'\n	size = '16px'\n	uppercase = 'false' \n	underline = 'false' \n	bold = 'false' \n	italic = 'false' \n	type = 'field'\n\n\n\n	  \n      	lineHeight = '22'\n      	  numOfLines = '1'\n	  value = 'Phone_Number'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n		paddingTop = '17px'\n	paddingLeft = '0px'\n	paddingRight = '17px'\n	paddingBottom = '17px'\n\n		width = '34%'\n		hAlign = 'center'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '0px'\n	color = '#0ABB51'\n	size = '20px'\n	uppercase = 'false' \n	underline = 'false' \n	bold = 'true' \n	italic = 'false' \n	type = 'field'\n\n\n\n	  \n      	lineHeight = '28'\n      	  numOfLines = '1'\n	  value = 'Departure_Location1'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '10px'\n	color = '#868686'\n	size = '15px'\n	uppercase = 'false' \n	underline = 'false' \n	bold = 'false' \n	italic = 'false' \n	type = 'field'\n\n\n\n	  \n      	lineHeight = '21'\n      	  numOfLines = '1'\n	  value = 'Mode_of_Travel'\n>\n</text>\n\n</pc>\n</pr><pr \n	>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '10px'\n	color = '#FF4C2F'\n	size = '16px'\n	uppercase = 'false' \n	underline = 'false' \n	bold = 'false' \n	italic = 'false' \n	type = 'field'\n\n\n\n	  \n      	lineHeight = '22'\n      	  numOfLines = '1'\n	  value = 'Destination_Location1'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n		padding = '0px'\n\n		width = '33%'\n		hAlign = 'center'\n		vAlign = 'middle'\n>\n	<pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		padding = '17px'\n\n		width = '100%'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<image  \n		marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '0px'\n\n	color = '#FFFFFF'\n	width = '80px'\n	height = '80px'\n	type = 'field'\n	value = 'Vehicle_Image'\n	cornerRadius = '0px'\n/>\n</pc>\n</pr>\n</pc>\n</pr><pr \n			width='fill'\n		height='fill'\n>\n	<pc \n		paddingTop = '0px'\n	paddingLeft = '17px'\n	paddingRight = '17px'\n	paddingBottom = '17px'\n\n		width = '100%'\n		hAlign = 'center'\n>\n	<pr \n			width='auto'\n		height='auto'\n>\n	<pc \n	\n>\n	<text \n\n	marginLeft = '0px'\n	marginRight = '0px' \n	marginBottom = '0px'\n	marginTop = '0px'\n	color = '#000000'\n	size = '20px'\n	uppercase = 'false' \n	underline = 'false' \n	bold = 'true' \n	italic = 'false' \n	type = 'field'\n\n\n\n	  \n      	lineHeight = '28'\n      	  numOfLines = '1'\n	  value = 'Vehicle_Type'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>"
+	    		)
+			)
+		}
+		default custom All_Rides
+		{
+			displayName = "All Rides"
+			show all rows from Join_Ride    
+			(
+				Mode_of_Travel as "Mode of Travel"
+				slot1 as "Departure Location"
+				slot2 as "Destination Location"
+				slot3 as "Travel Date"
+				Name
+				Email
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Seats_Required as "Seats Required"
+				Vehicle_Type as "Vehicle Type"
+				Confirm_Ride as "Confirm Ride"
+				slotin1 as "Departure Location"
+				slotin2 as "Destination Location"
+				Status
+				Date_field as "Date"
+				slotin1.Vehicle_Number as "Vehicle Number"
+				Amount
+			)
+			conditional formatting
+			(
+				"New Formatting"
+				{
+				fields = [Name]
+				format = "color:#ffffff;background-color:#818c8e;"
+				}
+			)
+		}
+		list Interstate_Rides
+		{
+			displayName = "Interstate_Rides"
+			show all rows from Join_Ride  [Mode_of_Travel == "InterState"]  
+			(
+				Mode_of_Travel as "Mode of Travel"
+				slot1 as "Departure Location"
+				slot2 as "Destination Location"
+				slot3 as "Travel Date"
+				Name
+				Email
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Seats_Required as "Seats Required"
+				Vehicle_Type as "Vehicle Type"
+				Confirm_Ride as "Confirm Ride"
+				slotin1 as "Departure Location"
+				slotin2 as "Destination Location"
+				Status
+				Amount
+			)
+		}
+		list IntraState_Rides
+		{
+			displayName = "IntraState_Rides"
+			show all rows from Join_Ride  [Mode_of_Travel == "IntraState"]  
+			(
+				Mode_of_Travel as "Mode of Travel"
+				slot1 as "Departure Location"
+				slot2 as "Destination Location"
+				slot3 as "Travel Date"
+				Name
+				Email
+				Phone_Number as "Phone"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+				Seats_Required as "Seats Required"
+				Vehicle_Type as "Vehicle Type"
+				Confirm_Ride as "Confirm Ride"
+				slotin1 as "Departure Location"
+				slotin2 as "Destination Location"
+				Status
+				slotin2.Date_field as "Date"
+				Amount
+			)
+		}
+	}
+	pages
+	{
+		page DashBoard
+		{
+			displayname = "DashBoard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"50%\"\n   \t>\n\t<panel elementName=\"Panel\"\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#00D9B1'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<button \n\t\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n    action = 'OpenReport'\n\t\tcomponentLinkName = 'Interstate_Rides'\n\t\ttarget = 'new-window'\n\tcolor = '#FFFFFF'\n\tsize = '16px'\n\ttext ='Interstate_Rides'\n\t\ttype = 'rounded'\n\t\tbgColor = '#0072F4'\n\t\tcornerRadius = '45.6px' \n\/>\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr>\n<\/panel>\n<\/column><column\n   \t\t width=\"50%\"\n   \t>\n\t<panel elementName=\"Panel 1\"\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#00D9B1'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<button \n\t\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n    action = 'OpenReport'\n\t\tcomponentLinkName = 'IntraState_Rides'\n\t\ttarget = 'new-window'\n\tcolor = '#FFFFFF'\n\tsize = '16px'\n\ttext ='IntraState_Rides'\n\t\ttype = 'rounded'\n\t\tbgColor = '#0072F4'\n\t\tcornerRadius = '45.6px' \n\/>\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr>\n<\/panel>\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<panel elementName=\"Panel 2\"\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n\t\thAlign = 'right'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = '#00D9B1'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\t  \n\t  value = 'thisapp.Slots.ID.count'\n>\n<\/text>\n\n<\/pc>\n<\/pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '1px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\n\n\t  \n\t  value = 'Total Slots'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc><pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '7px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#00D9B1'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'arrows-1-cloud-upload-96'\n\tsize = '32px'\n\tcornerRadius = '26px'\n\ticonType = 'outline'\n\/>\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr>\n<\/panel>\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<panel elementName=\"Panel 3\"\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'center'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '5px'\n\n\t\thAlign = 'right'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = '#00D9B1'\n\tsize = '36px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\t  \n\t  value = 'thisapp.Join_Ride.ID.count'\n>\n<\/text>\n\n<\/pc>\n<\/pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '1px'\n\tcolor = '#333333'\n\tsize = '16px'\n\ttype = 'Text'\n\n\n\n\t  \n\t  value = 'Riders'\n>\n<\/text>\n\n<\/pc>\n<\/pr>\n<\/pc><pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '7px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#00D9B1'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'arrows-4-download'\n\tsize = '32px'\n\tcornerRadius = '26px'\n\ticonType = 'outline'\n\/>\n<\/pc>\n<\/pr>\n<\/pc>\n<\/pr>\n<\/panel>\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<widgets elementName='Widget' importedTemplate='true'\/>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>"
+		}
+		page Bg_Image
+		{
+			displayname = "Bg_Slots"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\twebDeviceConfig='{\"layout\":{\"displayType\":\"card\",\"design\":\"fluid\",\"style\":\"padding-right:0px;padding-top:0px;padding-bottom:0px;padding-left:0px;\"}}'\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dsp id='html_snippet' elementName=\"HTML Snippet\"\n bgColor=\"#FFFFFF\" \n>\n\t<![CDATA[htmlpage html_snippet()\ncontent\n&lt;%{\n\t%&gt;\n&lt;style&gt;\n\n form.form-table{\n\t background-size:cover !important;\n\t background-image:url(&quot;https:\/\/images.unsplash.com\/photo-1560803262-95a9de00a057?fm=jpg&amp;q=60&amp;w=3000&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNsb3Vkc3xlbnwwfHwwfHx8MA%3D%3D&quot;)!important;\n\t display: flex; \/* Turns the form container into a flex container *\/\n    flex-direction: column; \/* Aligns the fields vertically *\/\n    justify-content: center; \/* Centers the fields vertically *\/\n    align-items: center; \/* Centers the fields horizontally *\/\n    width: 100%; \/* Ensures the form fills the width of the page *\/\n    margin: auto;\n }\n &lt;\/style&gt;\n&lt;div elname=&apos;zc-component&apos; formLinkName=&apos;Slots&apos;\n params=&apos;zc_SuccMsg=Data Added Succesfully!&apos;&gt;Loading form...\n &lt;\/div&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dsp>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>"
+		}
+		page Bg_image2
+		{
+			displayname = "Bg_Join Ride"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<dsp id='html_snippet1' elementName=\"HTML Snippet\"\n bgColor=\"#FFFFFF\" \n>\n\t<![CDATA[htmlpage html_snippet1()\ncontent\n&lt;%{\n\t%&gt;\n&lt;style&gt;\n form.form-table{\n\t background-size:cover !important;\n\t background-image:url(&quot;https:\/\/images.pexels.com\/photos\/2470655\/pexels-photo-2470655.jpeg&quot;)!important;\n\t display: flex; \/* Turns the form container into a flex container *\/\n    flex-direction: column; \/* Aligns the fields vertically *\/\n    justify-content: center; \/* Centers the fields vertically *\/\n    align-items: center; \/* Centers the fields horizontally *\/\n    width: 100%; \/* Ensures the form fills the width of the page *\/\n    margin: auto;\n }\n &lt;\/style&gt;\n&lt;div elname=&apos;zc-component&apos; formLinkName=&apos;Join_Ride&apos;\n params=&apos;zc_SuccMsg=Data Added Succesfully!&apos;&gt;Loading form...&lt;\/div&gt;\n&lt;%\n\n}%&gt;]]>\n<\/dsp>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>"
+		}
+	}
+
+
+		workflow
+		{
+		form
+		{
+			modeTravel as "modeTravel"
+			{
+				type =  form
+				form = Slots
+				record event = on add or edit
+
+				field rules
+				{
+					actions  (Mode_of_Travel == "Intra-State")
+					{
+						show Mode_Travel;
+						hide Mode_Travel2;
+					}
+				}
+
+			}
+			fieldrules as "fieldrules"
+			{
+				type =  form
+				form = Join_Ride
+				record event = on add or edit
+
+				field rules
+				{
+					actions  (Mode_of_Travel == "InterState")
+					{
+						show InterState;
+						hide IntraState;
+					}
+					actions  (Mode_of_Travel == "IntraState")
+					{
+						show IntraState;
+						hide InterState;
+					}
+				}
+
+			}
+			hidestatus as "hidestatus"
+			{
+				type =  form
+				form = Join_Ride
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											hide Status;
+						)
+					}
+				}
+
+			}
+			seatsrules as "seatsrules"
+			{
+				type =  form
+				form = Join_Ride
+				record event = on add or edit
+
+				field rules
+				{
+					actions  (Vehicle_Type == "4-Wheeler")
+					{
+						show Seats_Required;
+					}
+					actions  (Vehicle_Type == "2-Wheeler")
+					{
+						hide Seats_Required;
+					}
+				}
+
+			}
+			availability as "availability"
+			{
+				type =  form
+				form = Join_Ride
+				record event = on add or edit
+
+				on success
+				{
+				}
+
+			}
+			interState_fetchamt as "interState_fetchamt"
+			{
+				type =  form
+				form = Join_Ride
+				record event = on add or edit
+
+				on user input of slot2
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Amount = input.slot2.Price;
+						)
+					}
+				}
+
+			}
+			intraState_fetchat as "intraState_fetchat"
+			{
+				type =  form
+				form = Join_Ride
+				record event = on add or edit
+
+				on user input of slotin2
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											input.Amount = input.slotin2.Price;
+						)
+					}
+				}
+
+			}
+			noneditable_amount as "noneditable_amount"
+			{
+				type =  form
+				form = Join_Ride
+				record event = on add or edit
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											disable Amount;
+						)
+					}
+				}
+
+			}
+		}
+
+
+
+		approval
+		{
+			approval as "approval"
+			{
+				type =  approval
+				form = Join_Ride[Confirm_Ride == "Yes"]
+				display fields = [Mode_of_Travel,Vehicle_Type,slot1,slot2,slot3,slotin1,slotin2]
+				on start
+				{
+				}
+				on level 1
+				{
+					on approve 
+					{
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been approved."
+							)
+						}
+						actions 
+						{
+						on load
+						(
+							input.Status = "Confirmed";
+						)
+						}
+					}
+					on reject
+					{
+
+						actions 
+						{
+							sendmail
+							(
+								from : zoho.loginuserid
+								to : approver.submitter
+								subject : "Approval Request"
+								message : "Your request has been rejected."
+							)
+						}
+					}
+				}
+			}
+		}
+
+		blueprint
+		{
+    			FasTag as "FasTag"
+    			{
+        			type = Blueprint
+        			form = Join_Ride
+        			start
+        			{
+            			start stage = "Amount"
+            			chart data
+            			{
+                			from port : B
+                			to port   : B3
+                			position  : "5 -45"
+                			path      : [32.849999999999994,-8.159999999999998,32.849999999999994,1.8400000000000016,32.849999999999994,4,-28,4,-28,124,31.61599884033203,124,31.61599884033203,121.60782979522162,31.61599884033203,111.60782979522162]
+            			}
+        			}
+        			stages
+        			{
+           			"Amount"
+           			{
+               			chart data
+               			{
+                   			position : "-15.223052470852995 60"
+               			}
+           			}
+           			"Amount2"
+           			{
+               			chart data
+               			{
+                   			position : "-137 140.25968921389398"
+               			}
+           			}
+           			"Amount3"
+           			{
+               			chart data
+               			{
+                   			position : "81 133.25968921389398"
+               			}
+           			}
+        			}
+        			transitions
+        			{
+    				FasTag as "FasTag"
+    				{
+         				type = normal
+         				from stage = "Amount"
+         				to stage = "Amount2"
+         				before
+         				{
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															input.Amount = input.Amount + 50;
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : L1
+             				to port   : T3
+             				path      : [-15.223052470852995,85.80391489761081,-25.223052470852995,85.80391489761081,-86.10095113022123,85.80391489761081,-86.10095113022123,108.0318020557524,-86.10095113022123,130.25968921389398,-86.10095113022123,140.25968921389398]
+        				}
+  				}
+    				Non_FasTag as "Non-FasTag"
+    				{
+         				type = normal
+         				from stage = "Amount"
+         				to stage = "Amount3"
+         				before
+         				{
+         				}
+         				after
+         				{
+							actions 
+							{
+								custom deluge script
+								(
+															input.Amount = input.Amount + 1000;
+								)
+							}
+         				}
+         				chart data
+         				{
+             				from port : R1
+             				to port   : T3
+             				path      : [78.45505015151706,85.80391489761081,88.45505015151706,85.80391489761081,131.89904886977877,85.80391489761081,131.89904886977877,104.5318020557524,131.89904886977877,123.25968921389398,131.89904886977877,133.25968921389398]
+        				}
+  				}
+        			}
+    			}
+		}
+
+
+		functions
+		{
+			updateAvailability as "updateAvailability"
+			{
+				type =  functions
+				form = Slots
+				execution type = for each record	
+				on start
+				{
+					actions 
+					{
+					on click
+					(
+						input.Availablity = "Booked";
+					)
+					}
+				}
+			}
+		}
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form Join_Ride
+			{
+				label placement = left
+			}
+			form Slots
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report All_Slots
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								ID1 as "ID"
+								Owner_Name as "Owner Name"
+								Image
+								Vehicle_Type as "Vehicle Type"
+								Vehicle_Image as "Vehicle Image"
+								Phone_Number as "Phone"
+								Mode_of_Travel as "Mode of Travel"
+								Date_field as "Date"
+								Availablity
+								"Update"
+								Price
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Owner_Name as "Owner Name"
+								Vehicle_Type as "Vehicle Type"
+								Phone_Number as "Phone"
+								Email
+								Mode_of_Travel as "Mode of Travel"
+								Date_field as "Date"
+								Time
+								Departure_Date as "Departure Date"
+								Departure_Time as "Departure Time"
+								Departure_Location1 as "Departure Location"
+								Destination_Location1 as "Destination_Location"
+								Departure_Location2 as "Departure Location IN"
+								Destination_Location2 as "Destination Location IN"
+								Reach_Date as "Reach Date"
+								Reach_Time as "Reach Time"
+								Perks
+								Negotiable
+								Price
+								Discription
+								Vehicle_Image as "Vehicle Image"
+								Image
+								Age
+								Proof_of_Identity as "Proof of Identity"
+								Gender
+								Vehicle_Number as "Vehicle Number"
+								Availablity
+								ID1 as "ID"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report Copy_of_All_Slots
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = Custom
+		 				selectedlayout = "Custom Layout 1"
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+							layout type = -2
+		     				title = "Overview"
+							fields
+							(
+								Owner_Name as "Owner Name"
+								Vehicle_Type as "Vehicle Type"
+								Phone_Number as "Phone"
+								Email
+								Mode_of_Travel as "Mode of Travel"
+								Date_field as "Date"
+								Time
+								Departure_Date as "Departure Date"
+								Departure_Time as "Departure Time"
+								Departure_Location1 as "Departure Location"
+								Destination_Location1 as "Destination_Location"
+								Departure_Location2 as "Departure Location IN"
+								Destination_Location2 as "Destination Location IN"
+								Reach_Date as "Reach Date"
+								Reach_Time as "Reach Time"
+								Perks
+								Negotiable
+								Price
+								Discription
+								Vehicle_Image as "Vehicle Image"
+								Image
+								Age
+								Proof_of_Identity as "Proof of Identity"
+								Gender
+								Vehicle_Number as "Vehicle Number"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report All_Rides
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 2
+						datablock1
+						(
+							layout type = 4
+							fields
+							(
+								Name
+								Mode_of_Travel as "Mode of Travel"
+								Email
+								Phone_Number as "Phone"
+								slotin1.Vehicle_Number as "Vehicle Number"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Mode_of_Travel as "Mode of Travel"
+								slot1 as "Departure Location"
+								slot2 as "Destination Location"
+								slot3 as "Travel Date"
+								Name
+								Email
+								Phone_Number as "Phone"
+								Seats_Required as "Seats Required"
+								Vehicle_Type as "Vehicle Type"
+								Confirm_Ride as "Confirm Ride"
+								slotin1 as "Departure Location"
+								slotin2 as "Destination Location"
+								Status
+								Date_field as "Date"
+								Amount
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report Interstate_Rides
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Mode_of_Travel as "Mode of Travel"
+								slot1 as "Departure Location"
+								slot2 as "Destination Location"
+								slot3 as "Travel Date"
+								Name
+								Email
+								Phone_Number as "Phone"
+								Status
+								Amount
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Mode_of_Travel as "Mode of Travel"
+								slot1 as "Departure Location"
+								slot2 as "Destination Location"
+								slot3 as "Travel Date"
+								Name
+								Email
+								Phone_Number as "Phone"
+								Seats_Required as "Seats Required"
+								Vehicle_Type as "Vehicle Type"
+								Confirm_Ride as "Confirm Ride"
+								slotin1 as "Departure Location"
+								slotin2 as "Destination Location"
+								Status
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+			report IntraState_Rides
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								Mode_of_Travel as "Mode of Travel"
+								Name
+								Email
+								Phone_Number as "Phone"
+								Status
+								slotin1 as "Departure Location"
+								slotin2 as "Destination Location"
+								slotin2.Date_field as "Date"
+								Amount
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Delete   	   
+							Duplicate   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								Mode_of_Travel as "Mode of Travel"
+								slot1 as "Departure Location"
+								slot2 as "Destination Location"
+								slot3 as "Travel Date"
+								Name
+								Email
+								Phone_Number as "Phone"
+								Seats_Required as "Seats Required"
+								Vehicle_Type as "Vehicle Type"
+								Confirm_Ride as "Confirm Ride"
+								slotin1 as "Departure Location"
+								slotin2 as "Destination Location"
+								Status
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    	 				)
+    				)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Slots
+				{
+					displayname = "Slots"
+					icon = "tech-2-pci-card"
+					form  Slots
+					{
+						icon = "tech-2-pci-card"
+					}
+					report All_Slots
+					{
+						icon = "tech-desktop"
+					}
+					report Copy_of_All_Slots
+					{
+						icon = "tech-2-pci-card"
+					}
+				}
+				section App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Connection"
+						icon = "tech-2-connection"
+					}
+				}
+				section Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+				section DashBoard
+				{
+					displayname = "DashBoard"
+					icon = "ui-1-dashboard-half"
+					page DashBoard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+					page Bg_Image
+					{
+						icon = "tech-desktop"
+					}
+					page Bg_image2
+					{
+						icon = "tech-desktop"
+					}
+				}
+				section Rides
+				{
+					displayname = "Rides"
+					icon = "transportation-vespa-front"
+					form  Join_Ride
+					{
+						icon = "transportation-vespa-front"
+					}
+					report All_Rides
+					{
+						icon = "tech-desktop"
+					}
+					report Interstate_Rides
+					{
+						icon = "transportation-vespa-front"
+					}
+					report IntraState_Rides
+					{
+						icon = "transportation-vespa-front"
+					}
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = outline
+				}
+			}
+		}
+		customize
+		{
+			new theme = 11
+			font = "lato"
+			color options
+			{
+				menu color = "#12132b"
+				header color = "#12132b"
+				name = "custom_color_1"
+				brand color = "#5051f9"
+				type = "custom"
+				sub menu color = "#2f305d"
+				secondaryColor = "#12132b"
+			}
+			logo
+			{
+				preference = "none"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form Join_Ride
+			{
+				label placement = auto
+			}
+			form Slots
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				type = "custom"
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form Join_Ride
+			{
+				label placement = auto
+			}
+			form Slots
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				type = "custom"
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
